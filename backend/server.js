@@ -4,7 +4,20 @@ const { Pool } = require("pg");
 require("dotenv").config();
 
 const app = express();
-app.use(cors());
+
+// Configurar CORS para permitir el frontend de Vercel
+const corsOptions = {
+    origin: [
+        'http://localhost:3000',
+        'http://localhost:5173',
+        'https://dazzzshboard-6zcximvje-egarpxmasters-projects.vercel.app',
+        /\.vercel\.app$/ // Permite todos los subdominios de vercel.app
+    ],
+    credentials: true,
+    optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Configuración de la conexión a PostgreSQL (Neon)
@@ -108,7 +121,13 @@ app.delete("/api/datos/:id", async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Servidor corriendo en puerto ${PORT}`);
-});
+// Para desarrollo local
+if (process.env.NODE_ENV !== 'production') {
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+        console.log(`Servidor corriendo en puerto ${PORT}`);
+    });
+}
+
+// Exportar para Vercel (serverless)
+module.exports = app;

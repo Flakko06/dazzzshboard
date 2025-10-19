@@ -25,6 +25,7 @@ interface Dato {
 }
 
 const COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 function Dashboard() {
   const [data, setData] = useState<Dato[]>([]);
@@ -36,7 +37,7 @@ function Dashboard() {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get<Dato[]>("http://localhost:5000/api/datos");
+      const response = await axios.get<Dato[]>(`${API_URL}/api/datos`);
       setData(response.data);
       setError(null);
     } catch (err) {
@@ -56,7 +57,7 @@ function Dashboard() {
     if (!newNombre || !newValor) return;
 
     try {
-      await axios.post("http://localhost:5000/api/datos", {
+      await axios.post(`${API_URL}/api/datos`, {
         nombre: newNombre,
         valor: parseInt(newValor)
       });
@@ -70,7 +71,7 @@ function Dashboard() {
 
   const handleDelete = async (id: number) => {
     try {
-      await axios.delete(`http://localhost:5000/api/datos/${id}`);
+      await axios.delete(`${API_URL}/api/datos/${id}`);
       fetchData();
     } catch (err) {
       console.error("Error al eliminar dato:", err);

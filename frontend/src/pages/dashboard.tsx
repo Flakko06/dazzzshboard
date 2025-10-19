@@ -21,7 +21,7 @@ interface Dato {
   nombre: string;
   valor: number;
   created_at?: string;
-  [key: string]: any;
+  [key: string]: any; // Index signature para compatibilidad con Recharts
 }
 
 const COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
@@ -108,8 +108,8 @@ function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen w-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
+      <div className="w-full xl:w-[85%] xl:mx-auto">
         <header className="mb-8">
           <h1 className="text-4xl font-bold text-gray-800 mb-2">Dashboard Interactivo</h1>
           <p className="text-gray-600">Visualización de datos en tiempo real desde MySQL</p>

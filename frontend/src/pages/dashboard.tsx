@@ -37,7 +37,7 @@ function Dashboard() {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get<Dato[]>(`${API_URL}/api/datos`);
+      const response = await axios.get<Dato[]>(`${API_URL}/api/datos/`);
       setData(response.data);
       setError(null);
     } catch (err) {
@@ -57,7 +57,7 @@ function Dashboard() {
     if (!newNombre || !newValor) return;
 
     try {
-      await axios.post(`${API_URL}/api/datos`, {
+      await axios.post(`${API_URL}/api/datos/`, {
         nombre: newNombre,
         valor: parseInt(newValor)
       });

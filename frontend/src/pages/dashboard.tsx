@@ -37,6 +37,7 @@ function Dashboard() {
   const fetchData = async () => {
     try {
       setLoading(true);
+      console.log('URL:', `${API_URL}/api/datos/`);
       const response = await axios.get<Dato[]>(`${API_URL}/api/datos/`);
       setData(response.data);
       setError(null);

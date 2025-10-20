@@ -11,6 +11,7 @@ const corsOptions = {
         'http://localhost:3000',
         'http://localhost:5173',
         'https://dazzzshboard-6zcximvje-egarpxmasters-projects.vercel.app',
+        'https://dazzzshboard-ioi6.vercel.app',
         /\.vercel\.app$/ // Permite todos los subdominios de vercel.app
     ],
     credentials: true,
